@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.scoutsdk.sdk">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application>
+
+        <activity
+            android:name=".ui.ScoutUIActivity"
+            android:theme="@style/Theme.Modal"
+            android:excludeFromRecents="true">
+        </activity>
+    </application>
+
+</manifest>
