@@ -73,7 +73,8 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         version {
-            vcsTag '0.1.0'
+            name = '0.1.0'
+            vcsTag = '0.1.0'
             released  = new Date()
         }
     }
