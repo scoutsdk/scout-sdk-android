@@ -1,0 +1,27 @@
+query Titles {
+  titles {
+    id
+    slug
+    name
+    boxArtUrl
+    heroArtUrl
+    platforms {
+      name
+      slug
+    }
+  }
+}
+
+query Title($identifier: String) {
+  title(identifier: $identifier) {
+    id
+    slug
+    name
+    boxArtUrl
+    heroArtUrl
+    platforms {
+      name
+      slug
+    }
+  }
+}

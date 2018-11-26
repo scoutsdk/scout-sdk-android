@@ -1,0 +1,19 @@
+query User($id: String) {
+  user(id: $id) {
+    id
+    email
+    personas {
+      id
+      externalId
+      handle
+      pictureUrl
+      countryCode
+      region
+      isVerified
+      platform {
+        slug
+        name
+      }
+    }
+  }
+}

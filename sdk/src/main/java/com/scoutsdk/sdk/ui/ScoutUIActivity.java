@@ -28,6 +28,7 @@ public class ScoutUIActivity extends Activity {
 
         Intent intent = getIntent();
         String page = intent.getStringExtra("page");
+        long callbackId = intent.getLongExtra("callbackId", 0L);
 
         if (page != null) {
             switch (page) {
@@ -35,6 +36,10 @@ public class ScoutUIActivity extends Activity {
                     ui = new SearchWindow(this, null);
                     break;
             }
+        }
+
+        if (ui != null) {
+            ui.setCallbackId(callbackId);
         }
 
         setContentView(ui);

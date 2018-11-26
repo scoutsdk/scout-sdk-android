@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "graphql:download": "apollo schema:download --endpoint=https://api.scoutsdk.com/graph ./sdk/src/main/graphql/com/scoutsdk/sdk/schema.json --header=\"Scout-App: 2d6fa19a-ec77-4e95-acc8-8aed086174bc\""
+  },
+  "dependencies": {
+    "apollo": "^1.9.2"
+  }
+}

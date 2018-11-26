@@ -1,0 +1,98 @@
+query Player($title: String, $identifier: String, $segment: String) {
+  player(title: $title, id: $identifier, segment: $segment) {
+    id
+    metadata {
+      key
+      name
+      value
+      displayValue
+    }
+    stats {
+      metadata {
+        key
+        name
+        isReversed
+      }
+      value
+      displayValue
+    }
+    segments {
+      metadata {
+        key
+        name
+        value
+        displayValue
+      }
+      stats {
+        metadata {
+          key
+          name
+          isReversed
+        }
+        value
+        displayValue
+      }
+    }
+  }
+}
+
+subscription PlayerUpdate($title: String, $identifier: String, $segment: String) {
+  player(title: $title, id: $identifier, segment: $segment) {
+    id
+    metadata {
+      key
+      name
+      value
+      displayValue
+    }
+    stats {
+      metadata {
+        key
+        name
+        isReversed
+      }
+      value
+      displayValue
+    }
+    segments {
+      metadata {
+        key
+        name
+        value
+        displayValue
+      }
+      stats {
+        metadata {
+          key
+          name
+          isReversed
+        }
+        value
+        displayValue
+      }
+    }
+  }
+}
+
+query Search($platform: String, $console: String, $title: String, $identifier: String, $comprehensive: Boolean, $exact: Boolean) {
+  players(platform: $platform, console: $console, title: $title, identifier: $identifier, comprehensive: $comprehensive, exact: $exact) {
+    results {
+      player {
+        playerId
+        handle
+      }
+      persona {
+        id
+        handle
+        pictureUrl
+        countryCode
+        region
+        isVerified
+        platform {
+          slug
+          name
+        }
+      }
+    }
+  }
+}

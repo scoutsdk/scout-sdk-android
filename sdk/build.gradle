@@ -1,16 +1,43 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.apollographql.android'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:customtabs:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:support-media-compat:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
+    implementation 'com.google.ads.mediation:facebook:4.28.2.1'
+    implementation 'com.facebook.android:audience-network-sdk:4.99.1'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.6.0'
+    api 'net.sourceforge.streamsupport:android-retrostreams:1.6.3'
+    api 'com.apollographql.apollo:apollo-runtime:1.0.0-alpha3'
+    api 'com.apollographql.apollo:apollo-android-support:1.0.0-alpha3'
 }

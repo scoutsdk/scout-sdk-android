@@ -1,3 +1,4 @@
 <resources>
-    <string name="BASE_URL">http://10.0.2.2:8080</string>
+    <string name="WEBSDK_URL">http://10.0.2.2:8080</string>
+    <string name="GRAPH_URL">http://10.0.2.2:50291/api/graph</string>
 </resources>

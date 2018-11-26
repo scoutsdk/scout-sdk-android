@@ -1,0 +1,14 @@
+query Persona($id: String) {
+  persona(id: $id) {
+    id
+    handle
+    pictureUrl
+    countryCode
+    region
+    isVerified
+    platform {
+      slug
+      name
+    }
+  }
+}

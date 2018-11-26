@@ -1,0 +1,3 @@
+query Raw($title: String, $method: String, $parameters: [Dynamic]) {
+  raw(title: $title, method: $method, parameters: $parameters)
+}
