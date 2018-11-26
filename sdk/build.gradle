@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.apollographql.android'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 27
@@ -23,6 +25,58 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            groupId 'com.scoutsdk.sdk'
+            artifactId 'sdk'
+            version '0.1.0'
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    File localProperties = project.rootProject.file('local.properties')
+    Properties properties = new Properties()
+    if (localProperties.exists()) {
+        properties.load(localProperties.newDataInputStream())
+    }
+
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        userOrg = 'scoutsdk'
+        repo = 'maven'
+        name = 'com.scoutsdk.sdk'
+        desc = ''
+        websiteUrl = 'https://www.scoutsdk.com'
+        vcsUrl = 'https://github.com/scoutsdk/scout-sdk-android.git'
+        licenses = ['MIT']
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            name '0.1.0'
+            vcsTag '0.1.0'
+            released  = new Date()
+        }
     }
 }
 
