@@ -3,6 +3,8 @@ apply plugin: 'com.apollographql.android'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
+def publishVersion = '0.1.1'
+
 android {
     compileSdkVersion 27
 
@@ -10,7 +12,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName '0.1.1'
+        versionName publishVersion
     }
 
     buildTypes {
@@ -35,7 +37,7 @@ publishing {
             artifact("$buildDir/outputs/aar/sdk-release.aar")
             groupId 'com.scoutsdk.sdk'
             artifactId 'sdk'
-            version android.defaultConfig.versionName
+            version publishVersion
 
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
@@ -73,8 +75,8 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         version {
-            name = android.defaultConfig.versionName
-            vcsTag = android.defaultConfig.versionName
+            name = publishVersion
+            vcsTag = publishVersion
             released = new Date()
         }
     }
