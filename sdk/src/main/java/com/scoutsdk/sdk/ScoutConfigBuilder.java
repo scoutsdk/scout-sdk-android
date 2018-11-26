@@ -1,14 +1,14 @@
 package com.scoutsdk.sdk;
 
 public class ScoutConfigBuilder {
-    private String appId;
+    private String clientId;
 
-    public ScoutConfigBuilder appId(String appId) {
-        this.appId = appId;
+    public ScoutConfigBuilder clientId(String clientId) {
+        this.clientId = clientId;
         return this;
     }
 
     public ScoutConfig build() {
-        return new ScoutConfig(appId);
+        return new ScoutConfig(clientId);
     }
 }
