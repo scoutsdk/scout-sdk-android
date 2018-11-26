@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "0.1.0"
+        versionName '0.1.1'
     }
 
     buildTypes {
@@ -35,7 +35,7 @@ publishing {
             artifact("$buildDir/outputs/aar/sdk-release.aar")
             groupId 'com.scoutsdk.sdk'
             artifactId 'sdk'
-            version '0.1.0'
+            version android.defaultConfig.versionName
 
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
@@ -61,6 +61,7 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
+    configurations = ['archives']
     pkg {
         userOrg = 'scoutsdk'
         repo = 'maven'
@@ -72,9 +73,9 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         version {
-            name = '0.1.0'
-            vcsTag = '0.1.0'
-            released  = new Date()
+            name = android.defaultConfig.versionName
+            vcsTag = android.defaultConfig.versionName
+            released = new Date()
         }
     }
     publications = ['Production']
