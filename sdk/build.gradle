@@ -67,7 +67,6 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        userOrg = 'scoutsdk'
         repo = 'maven'
         name = 'com.scoutsdk.sdk'
         desc = ''
