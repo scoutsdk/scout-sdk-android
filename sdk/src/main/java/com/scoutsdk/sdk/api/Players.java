@@ -10,6 +10,7 @@ import com.apollographql.apollo.exception.ApolloException;
 import com.scoutsdk.sdk.PlayerQuery;
 import com.scoutsdk.sdk.PlayerUpdateSubscription;
 import com.scoutsdk.sdk.ScoutConfig;
+import com.scoutsdk.sdk.SearchQuery;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +37,29 @@ public class Players {
         ).enqueue(new ApolloCall.Callback<PlayerQuery.Data>() {
 
             @Override public void onResponse(@NotNull Response<PlayerQuery.Data> res) {
+                callback.accept(res);
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                callback.accept(null);
+            }
+        });
+    }
+
+    public void search(String identifier, String platform, String console, String title, Boolean comprehensive, Boolean exact, Consumer<Response<SearchQuery.Data>> callback) {
+        apolloClient.query(
+                SearchQuery.builder()
+                        .identifier(identifier)
+                        .platform(platform)
+                        .console(console)
+                        .title(title)
+                        .comprehensive(comprehensive)
+                        .exact(exact)
+                        .build()
+        ).enqueue(new ApolloCall.Callback<SearchQuery.Data>() {
+
+            @Override public void onResponse(@NotNull Response<SearchQuery.Data> res) {
                 callback.accept(res);
             }
 
