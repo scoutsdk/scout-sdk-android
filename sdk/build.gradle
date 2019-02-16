@@ -67,7 +67,7 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        repo = 'maven'
+        repo = 'com.scoutsdk.sdk'
         name = 'com.scoutsdk.sdk'
         desc = ''
         websiteUrl = 'https://www.scoutsdk.com'
