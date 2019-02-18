@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.apollographql.android'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'maven-publish'
+apply plugin: 'digital.wup.android-maven-publish'
 
-project.version = '0.1.2'
+project.version = '0.1.3'
 
 android {
     compileSdkVersion 27
@@ -28,29 +28,26 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+    }
 }
 
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.sourceFiles
+    classifier 'sources'
+}
 
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            from components.android
+            artifact(sourceJar)
+            artifact(bundleReleaseAar)
             groupId 'com.scoutsdk.sdk'
             artifactId 'sdk'
             version project.version
-
-            pom {
-                withXml {
-                    def dependenciesNode = asNode().appendNode('dependencies')
-
-                    configurations.compile.allDependencies.each {
-                        def dependencyNode = dependenciesNode.appendNode('dependency')
-                        dependencyNode.appendNode('groupId', it.group)
-                        dependencyNode.appendNode('artifactId', it.name)
-                        dependencyNode.appendNode('version', it.version)
-                    }
-                }
-            }
         }
     }
 }
@@ -69,7 +66,7 @@ bintray {
     pkg {
         repo = 'com.scoutsdk.sdk'
         name = 'com.scoutsdk.sdk'
-        desc = ''
+        desc = 'Build powerful gaming community apps with magic. Scout delivers gaming stats to apps and websites.'
         websiteUrl = 'https://www.scoutsdk.com'
         vcsUrl = 'https://github.com/scoutsdk/scout-sdk-android.git'
         licenses = ['MIT']
@@ -83,6 +80,14 @@ bintray {
     }
     publications = ['Production']
 }
+
+task releaseForBintrayUpload(dependsOn: [
+        'clean',
+        'assembleRelease',
+        'generatePomFileForProductionPublication',
+        'sourceJar'
+])
+bintrayUpload.dependsOn(releaseForBintrayUpload)
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'

@@ -9,6 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'digital.wup:android-maven-publish:3.4.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.apollographql.apollo:apollo-gradle-plugin:1.0.0-alpha3'
     }
